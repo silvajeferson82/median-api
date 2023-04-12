@@ -28,7 +28,12 @@ export class ArticlesService {
   }
 
   async findOne(id: string) {
-    return await this.prisma.article.findUnique({ where: { id } });
+    return await this.prisma.article.findUnique({
+      where: { id },
+      include: {
+        author: true,
+      },
+    });
   }
 
   async update(id: string, updateArticleDto: UpdateArticleDto) {
