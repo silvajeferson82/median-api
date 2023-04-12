@@ -20,31 +20,37 @@ export class AuthorsController {
 
   @Post()
   @ApiCreatedResponse({ type: AuthorEntity })
-  create(@Body() createAuthorDto: CreateAuthorDto) {
-    return this.authorsService.create(createAuthorDto);
+  async create(@Body() createAuthorDto: CreateAuthorDto) {
+    return new AuthorEntity(await this.authorsService.create(createAuthorDto));
   }
 
   @Get()
   @ApiOkResponse({ type: AuthorEntity, isArray: true })
-  findAll() {
-    return this.authorsService.findAll();
+  async findAll() {
+    const authors = await this.authorsService.findAll();
+    return authors.map((author) => new AuthorEntity(author));
   }
 
   @Get(':id')
   @ApiOkResponse({ type: AuthorEntity })
-  findOne(@Param('id') id: string) {
-    return this.authorsService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return new AuthorEntity(await this.authorsService.findOne(id));
   }
 
   @Patch(':id')
   @ApiCreatedResponse({ type: AuthorEntity })
-  update(@Param('id') id: string, @Body() updateAuthorDto: UpdateAuthorDto) {
-    return this.authorsService.update(id, updateAuthorDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateAuthorDto: UpdateAuthorDto,
+  ) {
+    return new AuthorEntity(
+      await this.authorsService.update(id, updateAuthorDto),
+    );
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: AuthorEntity })
-  remove(@Param('id') id: string) {
-    return this.authorsService.remove(id);
+  async remove(@Param('id') id: string) {
+    return new AuthorEntity(await this.authorsService.remove(id));
   }
 }

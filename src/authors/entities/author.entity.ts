@@ -1,7 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Author } from '@prisma/client';
+import { Exclude } from 'class-transformer';
 
 export class AuthorEntity implements Author { 
+  constructor(partial: Partial<AuthorEntity>) {
+    Object.assign(this, partial);
+  }
 
   @ApiProperty()
   id: string;
@@ -18,6 +22,6 @@ export class AuthorEntity implements Author {
   @ApiProperty()
   email: string;
 
+  @Exclude()
   password: string;
-
 }
