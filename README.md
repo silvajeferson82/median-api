@@ -87,9 +87,9 @@ $ npm run test:cov
 # http://localhost:3000/api
 ```
 <p align="center">
-  <a href="https://www.prisma.io/blog/nestjs-prisma-rest-api-7D056s1BmOL0
-" target="blank"><img src="https://prisma-blog-ebon.vercel.app/blog/posts/nestjs-prisma-authentication/auth-workflow-swagger.gif
-" /></a>
+
+![Authentication Swagger](https://prisma-blog-ebon.vercel.app/blog/posts/nestjs-prisma-authentication/auth-workflow-swagger.gif)
+
 </p>
 
 ## Support
