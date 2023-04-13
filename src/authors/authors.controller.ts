@@ -6,12 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthorEntity } from './entities/author.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('authors')
 @ApiTags('authors')
@@ -25,6 +27,8 @@ export class AuthorsController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: AuthorEntity, isArray: true })
   async findAll() {
     const authors = await this.authorsService.findAll();
@@ -32,12 +36,16 @@ export class AuthorsController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: AuthorEntity })
   async findOne(@Param('id') id: string) {
     return new AuthorEntity(await this.authorsService.findOne(id));
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiCreatedResponse({ type: AuthorEntity })
   async update(
     @Param('id') id: string,
@@ -49,6 +57,8 @@ export class AuthorsController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: AuthorEntity })
   async remove(@Param('id') id: string) {
     return new AuthorEntity(await this.authorsService.remove(id));
