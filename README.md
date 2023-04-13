@@ -88,7 +88,8 @@ $ npm run test:cov
 ```
 <p align="center">
   <a href="https://www.prisma.io/blog/nestjs-prisma-rest-api-7D056s1BmOL0
-" target="blank"><img src="src/assets/final-app.png" /></a>
+" target="blank"><img src="https://prisma-blog-ebon.vercel.app/blog/posts/nestjs-prisma-authentication/auth-workflow-swagger.gif
+" /></a>
 </p>
 
 ## Support
